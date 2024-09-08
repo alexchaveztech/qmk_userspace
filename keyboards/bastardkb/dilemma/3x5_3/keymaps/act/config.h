@@ -17,8 +17,9 @@
  */
 #pragma once
 
+/* Establish maximum number of layers and state for more efficient use of memory size */
+#define LAYER_STATE_8BIT
 #define COMBO_COUNT 1
-#define COMBO_TERM 40
 
 // Enable rapid switch from tap to hold, disables double tap hold auto-repeat.
 #define QUICK_TAP_TERM 0
@@ -36,9 +37,13 @@
  * Configure the global tapping term (default: 200ms).
  * If you have a lot of accidental mod activations, crank up the tapping term.
  */
+#define COMBO_TERM 50
 #ifndef TAPPING_TERM
-#    define TAPPING_TERM 120
+#    define TAPPING_TERM 110
 #endif // TAPPING_TERM
+
+/* Disable unused features. */
+#define NO_ACTION_ONESHOT
 
 // disable trackpad taps
 // #define CIRQUE_PINNACLE_TAPPING_TERM 0
@@ -66,7 +71,7 @@
  * With `PERMISSIVE_HOLD`, within `TAPPING_TERM`:
  *   Mod(a)🠗 e🠗 e🠕 Mod(a)🠕 ➞ Mod+e
  */
-#define PERMISSIVE_HOLD
+// #define PERMISSIVE_HOLD
 
 /** Dilemma-specific features. */
 

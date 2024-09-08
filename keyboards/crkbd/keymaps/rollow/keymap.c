@@ -6,30 +6,31 @@
     LYR_BSE = 0,
     LYR_ALT,
     LYR_TAP,
-    LYR_NUM,
+    LYR_MED,
     LYR_NAV,
-    LYR_SYM,
+    LYR_NUM,
     LYR_NUF,
+    LYR_SYM,
     LYR_FUN,
     LYR_MSE,
 };
 
-//Combo to switch to switch BASE (Canary), ALT (ColemakDH), TAP Game (Qwerty)
-const uint16_t PROGMEM del_b_combo[] = {KC_DEL, KC_B, COMBO_END};
-const uint16_t PROGMEM del_p_combo[] = {KC_DEL, KC_P, COMBO_END};
-const uint16_t PROGMEM del_g_combo[] = {KC_DEL, KC_G, COMBO_END};
+//Combo to switch to switch BASE (Canary), ALT (Qwerty), TAP Game (Qwerty)
+const uint16_t PROGMEM g_q_combo[] = {KC_G, KC_Q, COMBO_END};
+const uint16_t PROGMEM g_w_combo[] = {KC_G, KC_W, COMBO_END};
+const uint16_t PROGMEM g_l_combo[] = {KC_G, KC_L, COMBO_END};
 combo_t key_combos[] = {
-    COMBO(del_b_combo, DF(LYR_BSE)),
-    COMBO(del_p_combo, DF(LYR_ALT)),
-    COMBO(del_g_combo, DF(LYR_TAP)),
+    COMBO(g_q_combo, DF(LYR_BSE)),
+    COMBO(g_w_combo, DF(LYR_ALT)),
+    COMBO(g_l_combo, DF(LYR_TAP)),
 };
 
+#define ESC_MED LT(LYR_MED, KC_ESC)
 #define TAB_NUM LT(LYR_NUM, KC_TAB)
 #define SPC_NAV LT(LYR_NAV, KC_SPC)
 #define ENT_SYM LT(LYR_SYM, KC_ENT)
 #define ENT_NUF LT(LYR_NUF, KC_ENT)
 #define BSP_FUN LT(LYR_FUN, KC_BSPC)
-#define ESC_MSE LT(LYR_MSE, KC_ESC)
 
 // Define clipboard behavior. Current = Windows //
 #define U_RDO C(KC_Y)
@@ -47,31 +48,43 @@ combo_t key_combos[] = {
        KC_W,    KC_L,    KC_Y,    KC_P,    KC_B,    KC_Z,    KC_F,    KC_O,    KC_U, KC_QUOT, \
        KC_C,    KC_R,    KC_S,    KC_T,    KC_G,    KC_M,    KC_N,    KC_E,    KC_I,    KC_A, \
        KC_Q,    KC_J,    KC_V,    KC_D,    KC_K,    KC_X,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, \
-                      ESC_MSE, TAB_NUM, SPC_NAV, ENT_SYM, BSP_FUN, KC_DEL
+                      ESC_MED, SPC_NAV, TAB_NUM, ENT_SYM, BSP_FUN, KC_DEL
 
 #define LAYOUT_LYR_ALT                                                                        \
-       KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,    KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT, \
-       KC_A,    KC_R,    KC_S,    KC_T,    KC_G,    KC_M,    KC_N,    KC_E,    KC_I,    KC_O, \
-       KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, \
-                      ESC_MSE, TAB_NUM, SPC_NAV, ENT_SYM, BSP_FUN, KC_DEL
-
-#define LAYOUT_LYR_TAP                                                                        \
        KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, \
        KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L, KC_QUOT, \
        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, \
+                      ESC_MED, SPC_NAV, TAB_NUM, ENT_SYM, BSP_FUN, KC_DEL
+
+#define LAYOUT_LYR_TAP                                                                        \
+       KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, \
+       KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H, KC_BTN1, XXXXXXX, KC_BTN2, KC_BTN3, \
+       KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, \
                       KC_LCTL, KC_LALT,  KC_SPC, ENT_NUF, BSP_FUN, KC_DEL
+
+#define LAYOUT_LYR_MED                                                                        \
+    _______________DEAD_HALF_ROW_______________, QK_BOOT,  EE_CLR,  QK_RBT, XXXXXXX, XXXXXXX, \
+    KC_WBAK, KC_BTN2, XXXXXXX, KC_BTN1, KC_WFWD, XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, \
+    ______________HOME_ROW_GACS_L______________, RGB_TOG, RGB_MOD, RGB_VAI, RGB_HUI, RGB_SAI, \
+                      _______, XXXXXXX, XXXXXXX, KC_MSTP, KC_MPLY, XXXXXXX
+
+#define LAYOUT_LYR_NAV                                                                         \
+    _______________DEAD_HALF_ROW_______________,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP,   KC_END, \
+    KC_WBAK, KC_BTN2, XXXXXXX, KC_BTN1, KC_WFWD, CW_TOGG, KC_LEFT, KC_DOWN,   KC_UP, KC_RIGHT, \
+    ______________HOME_ROW_GACS_L______________,   U_RDO,   U_PST,   U_CPY,   U_CUT,    U_UND, \
+                      XXXXXXX, _______, XXXXXXX,  KC_ENT,  KC_DEL, XXXXXXX
 
 #define LAYOUT_LYR_NUM                                                                        \
     _______________DEAD_HALF_ROW_______________, KC_LBRC,    KC_7,    KC_8,    KC_9, KC_RBRC, \
     _______________DEAD_HALF_ROW_______________,  KC_EQL,    KC_4,    KC_5,    KC_6, KC_SCLN, \
     ______________HOME_ROW_GACS_L______________, KC_BSLS,    KC_1,    KC_2,    KC_3,  KC_GRV, \
-                      XXXXXXX, _______, XXXXXXX, KC_MINS,    KC_0, KC_DOT
+                      XXXXXXX, XXXXXXX, _______, KC_MINS,    KC_0, KC_DOT
 
-#define LAYOUT_LYR_NAV                                                                         \
-    _______________DEAD_HALF_ROW_______________,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP,   KC_END, \
-    KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, KC_BTN1, CW_TOGG, KC_LEFT, KC_DOWN,   KC_UP, KC_RIGHT, \
-    KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_BTN2,   U_RDO,   U_PST,   U_CPY,   U_CUT,    U_UND, \
-                      XXXXXXX, XXXXXXX, _______,  KC_ENT,  KC_DEL, XXXXXXX
+#define LAYOUT_LYR_NUF                                                                        \
+    KC_LBRC,    KC_7,    KC_8,    KC_9, KC_RBRC, _______________DEAD_HALF_ROW_______________, \
+     KC_EQL,    KC_4,    KC_5,    KC_6, KC_SCLN, _______________DEAD_HALF_ROW_______________, \
+    KC_BSLS,    KC_1,    KC_2,    KC_3,  KC_GRV, ______________HOME_ROW_GACS_R______________, \
+                         KC_J,    KC_K,    KC_L,_______, XXXXXXX, XXXXXXX
 
 #define LAYOUT_LYR_SYM                                                                        \
     KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR, _______________DEAD_HALF_ROW_______________, \
@@ -80,24 +93,17 @@ combo_t key_combos[] = {
                       KC_UNDS, KC_LPRN, KC_RPRN, _______, XXXXXXX, XXXXXXX
 
 
-
-#define LAYOUT_LYR_NUF                                                                        \
-    KC_LBRC,    KC_7,    KC_8,    KC_9, KC_RBRC, _______________DEAD_HALF_ROW_______________, \
-     KC_EQL,    KC_4,    KC_5,    KC_6, KC_SCLN, _______________DEAD_HALF_ROW_______________, \
-    KC_BSLS,    KC_1,    KC_2,    KC_3,  KC_GRV, ______________HOME_ROW_GACS_R______________, \
-                      KC_CAPS,  KC_TAB, KC_LSFT,_______, XXXXXXX, XXXXXXX
-
 #define LAYOUT_LYR_FUN                                                                        \
     KC_F12,   KC_F7,   KC_F8,   KC_F9,  KC_PSCR, _______________DEAD_HALF_ROW_______________, \
     KC_F11,   KC_F5,   KC_F5,   KC_F6,  KC_SCRL, _______________DEAD_HALF_ROW_______________, \
-    KC_F10,   KC_F2,   KC_F2,   KC_F3,  KC_PAUS, ______________HOME_ROW_GACS_R______________, \
-                     XXXXXXX,  KC_APP,   KC_ESC,  XXXXXXX, _______, XXXXXXX
+    KC_F10,   KC_F1,   KC_F2,   KC_F3,  KC_PAUS, ______________HOME_ROW_GACS_R______________, \
+                      KC_ESC,  KC_APP,   KC_TAB,  XXXXXXX, _______, XXXXXXX
 
 #define LAYOUT_LYR_MSE                                                                        \
-    _______________DEAD_HALF_ROW_______________, XXXXXXX, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, \
-    _______________DEAD_HALF_ROW_______________, XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, \
-    ______________HOME_ROW_GACS_L______________,   U_RDO,   U_PST,   U_CPY,   U_CUT,   U_UND, \
-                      _______, XXXXXXX, XXXXXXX, KC_BTN1, KC_BTN2, XXXXXXX
+    _______________DEAD_HALF_ROW_______________, QK_BOOT,  EE_CLR,  QK_RBT, _______, _______, \
+    KC_WBAK, KC_BTN2, XXXXXXX, KC_BTN1, KC_WFWD, XXXXXXX, KC_BTN1, XXXXXXX, KC_BTN2, XXXXXXX, \
+    ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________, \
+                      _______, _______, _______, KC_BTN3, KC_BTN1, XXXXXXX
 
 #define _HOME_ROW_MOD_GACS(                                            \
     L00, L01, L02, L03, L04, R05, R06, R07, R08, R09,                  \
@@ -119,10 +125,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LYR_BSE] = LAYOUT_wrapper(HOME_ROW_MOD_GACS(LAYOUT_LYR_BSE)),
   [LYR_ALT] = LAYOUT_wrapper(HOME_ROW_MOD_GACS(LAYOUT_LYR_ALT)),
   [LYR_TAP] = LAYOUT_wrapper(LAYOUT_LYR_TAP),
-  [LYR_NUM] = LAYOUT_wrapper(LAYOUT_LYR_NUM),
+  [LYR_MED] = LAYOUT_wrapper(LAYOUT_LYR_MED),
   [LYR_NAV] = LAYOUT_wrapper(LAYOUT_LYR_NAV),
-  [LYR_SYM] = LAYOUT_wrapper(LAYOUT_LYR_SYM),
+  [LYR_NUM] = LAYOUT_wrapper(LAYOUT_LYR_NUM),
   [LYR_NUF] = LAYOUT_wrapper(LAYOUT_LYR_NUF),
+  [LYR_SYM] = LAYOUT_wrapper(LAYOUT_LYR_SYM),
   [LYR_FUN] = LAYOUT_wrapper(LAYOUT_LYR_FUN),
   [LYR_MSE] = LAYOUT_wrapper(LAYOUT_LYR_MSE),
 };

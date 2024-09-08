@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Establish maximum number of layers and state tfor more efficient use of memory size */
 #define LAYER_STATE_8BIT
-#define MAX_LAYER 9
+#define MAX_LAYER 10
 #define COMBO_COUNT 1
 
 /* Disabled features for efficient use of memory size */
@@ -33,11 +33,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define MASTER_LEFT
 #define MASTER_RIGHT
 
-#define USE_SERIAL_PD2
+#ifdef VIA_ENABLE
+/* VIA configuration. */
+#    define DYNAMIC_KEYMAP_LAYER_COUNT 10
+#endif // VIA_ENABLE
+
+// #define USE_SERIAL_PD2
 
 /* Establish timing for combo and tapping specifically affecting homerow mod */
-#define COMBO_TERM 20
-#define TAPPING_TERM 200
+#define COMBO_TERM 50
+#define TAPPING_TERM 110
 // #define TAPPING_TERM_PER_KEY
 // #define IGNORE_MOD_TAP_INTERRUPT
 // #define TAPPING_FORCE_HOLD
