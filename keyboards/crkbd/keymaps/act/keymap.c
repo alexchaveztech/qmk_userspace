@@ -138,11 +138,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master()) {
-    return OLED_ROTATION_270;  // flips the display 180 degrees if offhand
+    return OLED_ROTATION_180;  // choose to rotate the display 180 or 270 degrees if offhand
   }
   return rotation;
 }
-
 void oled_render_layer_state(void) {
 	// Host Keyboard Layer Status
     oled_write_P(PSTR("Layer: "), false);
@@ -184,10 +183,7 @@ void oled_render_layer_state(void) {
     oled_write_P(led_state.caps_lock ? PSTR("CAP ") : PSTR("    "), false);
     oled_write_P(led_state.scroll_lock ? PSTR("SCR ") : PSTR("    "), false);
 }
-
-
 char keylog_str[24] = {};
-
 const char code_to_name[60] = {
     ' ', ' ', ' ', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
     'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
@@ -195,7 +191,6 @@ const char code_to_name[60] = {
     '1', '2', '3', '4', '5', '6', '7', '8', '9', '0',
     'R', 'E', 'B', 'T', '_', '-', '=', '[', ']', '\\',
     '#', ';', '\'', '`', ',', '.', '/', ' ', ' ', ' '};
-
 void set_keylog(uint16_t keycode, keyrecord_t *record) {
   char name = ' ';
     if ((keycode >= QK_MOD_TAP && keycode <= QK_MOD_TAP_MAX) ||
@@ -203,17 +198,14 @@ void set_keylog(uint16_t keycode, keyrecord_t *record) {
   if (keycode < 60) {
     name = code_to_name[keycode];
   }
-
   // update keylog
   snprintf(keylog_str, sizeof(keylog_str), "%dx%d, k%2d : %c",
            record->event.key.row, record->event.key.col,
            keycode, name);
 }
-
 void oled_render_keylog(void) {
     oled_write(keylog_str, false);
 }
-
 void render_bootmagic_status(bool status) {
     /* Show Ctrl-Gui Swap options */
     static const char PROGMEM logo[][2][3] = {
@@ -228,7 +220,6 @@ void render_bootmagic_status(bool status) {
         oled_write_ln_P(logo[1][1], false);
     }
 }
-
 void oled_render_logo(void) {
     static const char PROGMEM qmk_logo[] = {
         0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0x8F, 0x90, 0x91, 0x92, 0x93, 0x94,
@@ -238,17 +229,15 @@ void oled_render_logo(void) {
 
     oled_write_P(qmk_logo, false);
 }
-
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
         oled_render_layer_state();
         oled_render_keylog();
     } else {
-        oled_render_logo();
+       oled_render_logo();
     }
     return false;
 }
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     set_keylog(keycode, record);

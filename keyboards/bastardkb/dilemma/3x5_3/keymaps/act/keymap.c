@@ -72,13 +72,13 @@ static uint16_t auto_pointer_layer_timer = 0;
        KC_W,    KC_L,    KC_Y,    KC_P,    KC_B,    KC_Z,    KC_F,    KC_O,    KC_U, KC_QUOT, \
        KC_C,    KC_R,    KC_S,    KC_T,    KC_G,    KC_M,    KC_N,    KC_E,    KC_I,    KC_A, \
        KC_Q,    KC_J,    KC_V,    KC_D,    KC_K,    KC_X,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, \
-                      ESC_MED, TAB_NUM, SPC_NAV, ENT_SYM, BSP_FUN, KC_DEL
+                      ESC_MED, SPC_NAV, TAB_NUM,  ENT_SYM, BSP_FUN, KC_DEL
 
 #define LAYOUT_LYR_ALT                                                                        \
        KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,    KC_J,    KC_L,    KC_U,    KC_Y, KC_QUOT, \
        KC_A,    KC_R,    KC_S,    KC_T,    KC_G,    KC_M,    KC_N,    KC_E,    KC_I,    KC_O, \
        KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,    KC_K,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, \
-                      ESC_MED, TAB_NUM, SPC_NAV, ENT_SYM, BSP_FUN, KC_DEL
+                      ESC_MED, SPC_NAV, TAB_NUM,  ENT_SYM, BSP_FUN, KC_DEL
 
 #define LAYOUT_LYR_TAP                                                                        \
        KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, \
@@ -87,22 +87,28 @@ static uint16_t auto_pointer_layer_timer = 0;
                       KC_LCTL, KC_LALT,  KC_SPC, ENT_NUF, BSP_FUN, KC_DEL
 
 #define LAYOUT_LYR_MED                                                                        \
-    _______________DEAD_HALF_ROW_______________, RGB_TOG, RGB_MOD, RGB_VAI, RGB_HUI, RGB_SAI, \
-    _______________DEAD_HALF_ROW_______________, XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT,  \
-    ______________HOME_ROW_GACS_L______________, QK_BOOT,  EE_CLR,  QK_RBT, XXXXXXX, XXXXXXX, \
+    _______________DEAD_HALF_ROW_______________, QK_BOOT,  EE_CLR,  QK_RBT, XXXXXXX, XXXXXXX, \
+    KC_WBAK, KC_BTN2, DRGSCRL, KC_BTN1, KC_WFWD, XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, \
+    ______________HOME_ROW_GACS_L______________, RGB_TOG, RGB_MOD, RGB_VAI, RGB_HUI, RGB_SAI, \
                       _______, XXXXXXX, XXXXXXX, KC_MSTP, KC_MPLY, KC_MUTE
-
-#define LAYOUT_LYR_NUM                                                                        \
-    _______________DEAD_HALF_ROW_______________, KC_LBRC,    KC_7,    KC_8,    KC_9, KC_RBRC, \
-    _______________DEAD_HALF_ROW_______________,  KC_EQL,    KC_4,    KC_5,    KC_6, KC_SCLN, \
-    ______________HOME_ROW_GACS_L______________, KC_BSLS,    KC_1,    KC_2,    KC_3,  KC_GRV, \
-                      XXXXXXX, _______, XXXXXXX, KC_MINS,    KC_0, KC_DOT
 
 #define LAYOUT_LYR_NAV                                                                         \
     _______________DEAD_HALF_ROW_______________,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP,   KC_END, \
     KC_WBAK, KC_BTN2, DRGSCRL, KC_BTN1, KC_WFWD, CW_TOGG, KC_LEFT, KC_DOWN,   KC_UP, KC_RIGHT, \
     ______________HOME_ROW_GACS_L______________,   U_RDO,   U_PST,   U_CPY,   U_CUT,    U_UND, \
-                      XXXXXXX, XXXXXXX, _______,  KC_ENT,  KC_DEL, XXXXXXX
+                      XXXXXXX, _______, XXXXXXX,  KC_ENT,  KC_DEL, XXXXXXX
+
+#define LAYOUT_LYR_NUM                                                                        \
+    _______________DEAD_HALF_ROW_______________, KC_LBRC,    KC_7,    KC_8,    KC_9, KC_RBRC, \
+    _______________DEAD_HALF_ROW_______________,  KC_EQL,    KC_4,    KC_5,    KC_6, KC_SCLN, \
+    ______________HOME_ROW_GACS_L______________, KC_BSLS,    KC_1,    KC_2,    KC_3,  KC_GRV, \
+                      XXXXXXX, XXXXXXX, _______, KC_MINS,    KC_0, KC_DOT
+
+#define LAYOUT_LYR_NUF                                                                        \
+    KC_LBRC,    KC_7,    KC_8,    KC_9, KC_RBRC, _______________DEAD_HALF_ROW_______________, \
+    KC_SCLN,    KC_4,    KC_5,    KC_6,  KC_EQL, _______________DEAD_HALF_ROW_______________, \
+     KC_GRV,    KC_1,    KC_2,    KC_3, KC_BSLS, ______________HOME_ROW_GACS_R______________, \
+                         KC_J,    KC_K,    KC_L,_______, XXXXXXX, XXXXXXX
 
 #define LAYOUT_LYR_SYM                                                                        \
     KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR, _______________DEAD_HALF_ROW_______________, \
@@ -110,23 +116,17 @@ static uint16_t auto_pointer_layer_timer = 0;
     KC_TILD, KC_EXLM,   KC_AT, KC_HASH, KC_PIPE, ______________HOME_ROW_GACS_R______________, \
                       KC_UNDS, KC_LPRN, KC_RPRN, _______, XXXXXXX, XXXXXXX
 
-#define LAYOUT_LYR_NUF                                                                        \
-    KC_LBRC,    KC_7,    KC_8,    KC_9, KC_RBRC, _______________DEAD_HALF_ROW_______________, \
-     KC_EQL,    KC_4,    KC_5,    KC_6, KC_SCLN, _______________DEAD_HALF_ROW_______________, \
-    KC_BSLS,    KC_1,    KC_2,    KC_3,  KC_GRV, ______________HOME_ROW_GACS_R______________, \
-                       KC_ESC,  KC_TAB, KC_LSFT,_______, XXXXXXX, XXXXXXX
-
 #define LAYOUT_LYR_FUN                                                                        \
     KC_F12,   KC_F7,   KC_F8,   KC_F9,  KC_PSCR, _______________DEAD_HALF_ROW_______________, \
     KC_F11,   KC_F4,   KC_F5,   KC_F6,  KC_SCRL, _______________DEAD_HALF_ROW_______________, \
-    KC_F10,   KC_F2,   KC_F2,   KC_F3,  KC_PAUS, ______________HOME_ROW_GACS_R______________, \
-                     XXXXXXX,  KC_APP,   KC_ESC,  XXXXXXX, _______, XXXXXXX
+    KC_F10,   KC_F1,   KC_F2,   KC_F3,  KC_PAUS, ______________HOME_ROW_GACS_R______________, \
+                      KC_ESC,  KC_APP,   KC_TAB,  XXXXXXX, _______, XXXXXXX
 
 #define LAYOUT_LYR_MSE                                                                        \
-   S_D_RMOD, S_D_MOD,DPI_RMOD, DPI_MOD, _______, QK_BOOT,  EE_CLR,  QK_RBT, _______, _______, \
-    _______, _______, DRG_TOG, SNP_TOG, _______, XXXXXXX, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, \
+   S_D_RMOD, S_D_MOD,DPI_RMOD, DPI_MOD, XXXXXXX, QK_BOOT,  EE_CLR,  QK_RBT, XXXXXXX, XXXXXXX, \
+    _______, KC_BTN2, DRGSCRL, KC_BTN1, KC_WFWD, KC_WBAK, KC_BTN1, DRGSCRL, KC_BTN2, _______, \
     ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________, \
-                      KC_BTN3, KC_BTN1, KC_BTN2, XXXXXXX, XXXXXXX, XXXXXXX
+                      XXXXXXX, XXXXXXX, XXXXXXX, KC_BTN3, KC_BTN1, XXXXXXX
 
 #define _HOME_ROW_MOD_GACS(                                            \
     L00, L01, L02, L03, L04, R05, R06, R07, R08, R09,                  \
@@ -163,10 +163,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LYR_ALT] = LAYOUT_wrapper(POINTER_MOD(HOME_ROW_MOD_GACS(LAYOUT_LYR_ALT))),
   [LYR_TAP] = LAYOUT_wrapper(LAYOUT_LYR_TAP),
   [LYR_MED] = LAYOUT_wrapper(LAYOUT_LYR_MED),
-  [LYR_NUM] = LAYOUT_wrapper(LAYOUT_LYR_NUM),
   [LYR_NAV] = LAYOUT_wrapper(LAYOUT_LYR_NAV),
-  [LYR_SYM] = LAYOUT_wrapper(LAYOUT_LYR_SYM),
+  [LYR_NUM] = LAYOUT_wrapper(LAYOUT_LYR_NUM),
   [LYR_NUF] = LAYOUT_wrapper(LAYOUT_LYR_NUF),
+  [LYR_SYM] = LAYOUT_wrapper(LAYOUT_LYR_SYM),
   [LYR_FUN] = LAYOUT_wrapper(LAYOUT_LYR_FUN),
   [LYR_MSE] = LAYOUT_wrapper(LAYOUT_LYR_MSE),
 };
