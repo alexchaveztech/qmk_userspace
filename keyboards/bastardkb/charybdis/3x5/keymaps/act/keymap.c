@@ -8,7 +8,7 @@ enum charybdis_keymap_layers {
     LYR_BSE = 0,
     LYR_ALT,
     LYR_TAP,
-    LYR_MED,
+    LYR_UTL,
     LYR_NAV,
     LYR_NUM,
     LYR_NUF,
@@ -27,7 +27,7 @@ combo_t key_combos[] = {
     COMBO(g_l_combo, DF(LYR_TAP)),
 };
 
-#define ESC_MED LT(LYR_MED, KC_ESC)
+#define ESC_MED LT(LYR_UTL, KC_ESC)
 #define TAB_NUM LT(LYR_NUM, KC_TAB)
 #define SPC_NAV LT(LYR_NAV, KC_SPC)
 #define ENT_SYM LT(LYR_SYM, KC_ENT)
@@ -86,8 +86,8 @@ static uint16_t auto_pointer_layer_timer = 0;
        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, \
                       KC_LCTL, KC_LALT,  KC_SPC, ENT_NUF, BSP_FUN
 
-#define LAYOUT_LYR_MED                                                                        \
-    _______________DEAD_HALF_ROW_______________, QK_BOOT,  EE_CLR,  QK_RBT, XXXXXXX, XXXXXXX, \
+#define LAYOUT_LYR_UTL                                                                        \
+   S_D_RMOD, S_D_MOD,DPI_RMOD, DPI_MOD, XXXXXXX, QK_BOOT,  EE_CLR,  QK_RBT, XXXXXXX, XXXXXXX, \
     KC_WBAK, KC_BTN2, DRGSCRL, KC_BTN1, KC_WFWD, XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, \
     ______________HOME_ROW_GACS_L______________, RGB_TOG, RGB_MOD, RGB_VAI, RGB_HUI, RGB_SAI, \
                       _______, XXXXXXX, XXXXXXX, KC_MSTP, KC_MPLY
@@ -123,10 +123,10 @@ static uint16_t auto_pointer_layer_timer = 0;
                       KC_ESC,  KC_APP,   KC_TAB,  XXXXXXX, _______
 
 #define LAYOUT_LYR_MSE                                                                        \
-   S_D_RMOD, S_D_MOD,DPI_RMOD, DPI_MOD, _______, QK_BOOT,  EE_CLR,  QK_RBT, _______, _______, \
-    KC_WBAK, KC_BTN2, DRGSCRL, KC_BTN1, KC_WFWD, XXXXXXX, KC_BTN1, DRGSCRL, KC_BTN2, XXXXXXX, \
+   S_D_RMOD, S_D_MOD,DPI_RMOD, DPI_MOD, XXXXXXX, QK_BOOT,  EE_CLR,  QK_RBT, XXXXXXX, XXXXXXX, \
+    KC_WBAK, KC_BTN2, DRGSCRL, KC_BTN1, KC_WFWD, KC_WBAK, KC_BTN1, DRGSCRL, KC_BTN2, KC_WFWD, \
     ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________, \
-                      _______, _______, _______, KC_BTN3, KC_BTN1
+                      XXXXXXX, XXXXXXX, XXXXXXX, KC_BTN3, KC_BTN1
 
 #define _HOME_ROW_MOD_GACS(                                            \
     L00, L01, L02, L03, L04, R05, R06, R07, R08, R09,                  \
@@ -162,7 +162,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LYR_BSE] = LAYOUT_wrapper(POINTER_MOD(HOME_ROW_MOD_GACS(LAYOUT_LYR_BSE))),
   [LYR_ALT] = LAYOUT_wrapper(POINTER_MOD(HOME_ROW_MOD_GACS(LAYOUT_LYR_ALT))),
   [LYR_TAP] = LAYOUT_wrapper(LAYOUT_LYR_TAP),
-  [LYR_MED] = LAYOUT_wrapper(LAYOUT_LYR_MED),
+  [LYR_UTL] = LAYOUT_wrapper(LAYOUT_LYR_UTL),
   [LYR_NAV] = LAYOUT_wrapper(LAYOUT_LYR_NAV),
   [LYR_NUM] = LAYOUT_wrapper(LAYOUT_LYR_NUM),
   [LYR_NUF] = LAYOUT_wrapper(LAYOUT_LYR_NUF),

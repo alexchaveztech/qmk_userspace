@@ -8,7 +8,7 @@ enum dilemma_keymap_layers {
     LYR_BSE = 0,
     LYR_ALT,
     LYR_TAP,
-    LYR_MED,
+    LYR_UTL,
     LYR_NUM,
     LYR_NAV,
     LYR_SYM,
@@ -27,7 +27,7 @@ combo_t key_combos[] = {
     COMBO(g_l_combo, DF(LYR_TAP)),
 };
 
-#define ESC_MED LT(LYR_MED, KC_ESC)
+#define ESC_MED LT(LYR_UTL, KC_ESC)
 #define TAB_NUM LT(LYR_NUM, KC_TAB)
 #define SPC_NAV LT(LYR_NAV, KC_SPC)
 #define ENT_SYM LT(LYR_SYM, KC_ENT)
@@ -86,8 +86,8 @@ static uint16_t auto_pointer_layer_timer = 0;
        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, \
                       KC_LCTL, KC_LALT,  KC_SPC, ENT_NUF, BSP_FUN, KC_DEL
 
-#define LAYOUT_LYR_MED                                                                        \
-    _______________DEAD_HALF_ROW_______________, QK_BOOT,  EE_CLR,  QK_RBT, XXXXXXX, XXXXXXX, \
+#define LAYOUT_LYR_UTL                                                                        \
+   S_D_RMOD, S_D_MOD,DPI_RMOD, DPI_MOD, XXXXXXX, QK_BOOT,  EE_CLR,  QK_RBT, XXXXXXX, XXXXXXX, \
     KC_WBAK, KC_BTN2, DRGSCRL, KC_BTN1, KC_WFWD, XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, \
     ______________HOME_ROW_GACS_L______________, RGB_TOG, RGB_MOD, RGB_VAI, RGB_HUI, RGB_SAI, \
                       _______, XXXXXXX, XXXXXXX, KC_MSTP, KC_MPLY, KC_MUTE
@@ -124,7 +124,7 @@ static uint16_t auto_pointer_layer_timer = 0;
 
 #define LAYOUT_LYR_MSE                                                                        \
    S_D_RMOD, S_D_MOD,DPI_RMOD, DPI_MOD, XXXXXXX, QK_BOOT,  EE_CLR,  QK_RBT, XXXXXXX, XXXXXXX, \
-    _______, KC_BTN2, DRGSCRL, KC_BTN1, KC_WFWD, KC_WBAK, KC_BTN1, DRGSCRL, KC_BTN2, _______, \
+    KC_WBAK, KC_BTN2, DRGSCRL, KC_BTN1, KC_WFWD, KC_WBAK, KC_BTN1, DRGSCRL, KC_BTN2, KC_WFWD, \
     ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________, \
                       XXXXXXX, XXXXXXX, XXXXXXX, KC_BTN3, KC_BTN1, XXXXXXX
 
@@ -162,7 +162,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LYR_BSE] = LAYOUT_wrapper(POINTER_MOD(HOME_ROW_MOD_GACS(LAYOUT_LYR_BSE))),
   [LYR_ALT] = LAYOUT_wrapper(POINTER_MOD(HOME_ROW_MOD_GACS(LAYOUT_LYR_ALT))),
   [LYR_TAP] = LAYOUT_wrapper(LAYOUT_LYR_TAP),
-  [LYR_MED] = LAYOUT_wrapper(LAYOUT_LYR_MED),
+  [LYR_UTL] = LAYOUT_wrapper(LAYOUT_LYR_UTL),
   [LYR_NAV] = LAYOUT_wrapper(LAYOUT_LYR_NAV),
   [LYR_NUM] = LAYOUT_wrapper(LAYOUT_LYR_NUM),
   [LYR_NUF] = LAYOUT_wrapper(LAYOUT_LYR_NUF),
@@ -170,7 +170,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LYR_FUN] = LAYOUT_wrapper(LAYOUT_LYR_FUN),
   [LYR_MSE] = LAYOUT_wrapper(LAYOUT_LYR_MSE),
 };
-
 // clang-format on
 
 #ifdef POINTING_DEVICE_ENABLE
@@ -179,6 +178,10 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     if (abs(mouse_report.x) > DILEMMA_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD || abs(mouse_report.y) > DILEMMA_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD) {
         if (auto_pointer_layer_timer == 0) {
             layer_on(LYR_MSE);
+#        ifdef RGB_MATRIX_ENABLE
+            rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
+            rgb_matrix_sethsv_noeeprom(HSV_GREEN);
+#        endif // RGB_MATRIX_ENABLE
         }
         auto_pointer_layer_timer = timer_read();
     }
@@ -189,6 +192,9 @@ void matrix_scan_user(void) {
     if (auto_pointer_layer_timer != 0 && TIMER_DIFF_16(timer_read(), auto_pointer_layer_timer) >= DILEMMA_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS) {
         auto_pointer_layer_timer = 0;
         layer_off(LYR_MSE);
+#        ifdef RGB_MATRIX_ENABLE
+        rgb_matrix_mode_noeeprom(RGB_MATRIX_DEFAULT_MODE);
+#        endif // RGB_MATRIX_ENABLE
     }
 }
 #    endif // DILEMMA_AUTO_POINTER_LAYER_TRIGGER_ENABLE
@@ -200,3 +206,9 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 }
 #    endif // DILEMMA_AUTO_SNIPING_ON_LAYER
 #endif     // POINTING_DEVICE_ENABLE
+
+#ifdef RGB_MATRIX_ENABLE
+// Forward-declare this helper function since it is defined in
+// rgb_matrix.c.
+void rgb_matrix_update_pwm_buffers(void);
+#endif
