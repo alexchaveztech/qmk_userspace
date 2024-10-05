@@ -14,10 +14,11 @@ enum charybdis_keymap_layers {
     LYR_SYM,
     LYR_FUN,
     LYR_UTL,
+    LYR_MSE,
 };
 
 // Automatically enable sniping-mode on the pointer layer.
-#define CHARYBDIS_AUTO_SNIPING_ON_LAYER LYR_NAV
+#define CHARYBDIS_AUTO_SNIPING_ON_LAYER LYR_MSE
 #ifdef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 static uint16_t auto_pointer_layer_timer = 0;
 #    ifndef CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS
@@ -44,7 +45,7 @@ combo_t key_combos[] = {
 #define ENT_SYM LT(LYR_SYM, KC_ENT)
 #define ENT_NUF LT(LYR_NUF, KC_ENT)
 #define BSP_FUN LT(LYR_FUN, KC_BSPC)
-#define _L_PTR(KC) LT(LYR_NAV, KC)
+#define _L_PTR(KC) LT(LYR_MSE, KC)
 
 // Define clipboard behavior. Current = Windows //
 #define U_RDO C(KC_Y)
@@ -80,10 +81,10 @@ combo_t key_combos[] = {
        KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H, KC_BTN1, DRGSCRL, KC_BTN2, KC_BTN3, \
        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, \
                       KC_LCTL, KC_LALT,  KC_SPC, ENT_NUF, BSP_FUN
-#define LAYOUT_LYR_NAV                                                                        \
-    XXXXXXX, XXXXXXX,  QK_RBT,  EE_CLR, QK_BOOT,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP,  KC_END, \
-    KC_WBAK, KC_BTN2, DRGSCRL, KC_BTN1, KC_WFWD, CW_TOGG, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, \
-    ______________HOME_ROW_GACS_L______________,   U_RDO,   U_PST,   U_CPY,   U_CUT,   U_UND, \
+#define LAYOUT_LYR_NAV                                                                         \
+    XXXXXXX, XXXXXXX,  QK_RBT,  EE_CLR, QK_BOOT,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP,   KC_END, \
+    KC_WBAK, KC_BTN2, DRGSCRL, KC_BTN1, KC_WFWD, CW_TOGG, KC_LEFT, KC_DOWN,   KC_UP, KC_RIGHT, \
+    ______________HOME_ROW_GACS_L______________,   U_RDO,   U_PST,   U_CPY,   U_CUT,    U_UND, \
                       XXXXXXX, _______, XXXXXXX,  KC_ENT,  KC_DEL
 #define LAYOUT_LYR_NUM                                                                        \
     _______________DEAD_HALF_ROW_______________, KC_LBRC,    KC_7,    KC_8,    KC_9, KC_RBRC, \
@@ -110,6 +111,11 @@ combo_t key_combos[] = {
     KC_WBAK, KC_BTN2, DRGSCRL, KC_BTN1, KC_WFWD, XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, \
    S_D_RMOD, S_D_MOD,DPI_RMOD, DPI_MOD, XXXXXXX, RGB_TOG, RGB_MOD, RGB_VAI, RGB_HUI, RGB_SAI, \
                       _______, KC_MPLY, KC_MSTP, KC_MSTP, KC_MPLY
+#define LAYOUT_LYR_MSE                                                                        \
+    QK_BOOT,  EE_CLR, XXXXXXX, DPI_MOD, S_D_MOD, S_D_MOD, DPI_MOD, XXXXXXX,  EE_CLR, QK_BOOT, \
+    ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________, \
+    _______, DRGSCRL, SNIPING, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, SNIPING, DRGSCRL, _______, \
+                      KC_BTN2, KC_BTN1, KC_BTN3, KC_BTN3, KC_BTN1
 
 #define _HOME_ROW_MOD_GACS(                                            \
     L00, L01, L02, L03, L04, R05, R06, R07, R08, R09,                  \
@@ -149,6 +155,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LYR_SYM] = LAYOUT_wrapper(LAYOUT_LYR_SYM),
   [LYR_FUN] = LAYOUT_wrapper(LAYOUT_LYR_FUN),
   [LYR_UTL] = LAYOUT_wrapper(LAYOUT_LYR_UTL),
+  [LYR_MSE] = LAYOUT_wrapper(LAYOUT_LYR_MSE),
 };
 
 #ifdef POINTING_DEVICE_ENABLE
@@ -156,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     if (abs(mouse_report.x) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD || abs(mouse_report.y) > CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD) {
         if (auto_pointer_layer_timer == 0) {
-            layer_on(LYR_NAV);
+            layer_on(LYR_MSE);
 #        ifdef RGB_MATRIX_ENABLE
             rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
             rgb_matrix_sethsv_noeeprom(HSV_GREEN);
@@ -170,7 +177,7 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 void matrix_scan_user(void) {
     if (auto_pointer_layer_timer != 0 && TIMER_DIFF_16(timer_read(), auto_pointer_layer_timer) >= CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS) {
         auto_pointer_layer_timer = 0;
-        layer_off(LYR_NAV);
+        layer_off(LYR_MSE);
 #        ifdef RGB_MATRIX_ENABLE
         rgb_matrix_mode_noeeprom(RGB_MATRIX_DEFAULT_MODE);
 #        endif // RGB_MATRIX_ENABLE
