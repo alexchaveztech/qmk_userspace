@@ -31,7 +31,7 @@
 #define QUICK_TAP_TERM 0
 #define COMBO_TERM 50
 #ifndef TAPPING_TERM
-#    define TAPPING_TERM 110
+#    define TAPPING_TERM 130
 #endif // TAPPING_TERM
 
 /** Dilemma-specific features. */
