@@ -107,7 +107,7 @@ combo_t key_combos[] = {
 #define LAYOUT_LYR_UTL                                                                        \
     XXXXXXX, XXXXXXX,  QK_RBT,  EE_CLR, QK_BOOT, QK_BOOT,  EE_CLR,  QK_RBT, XXXXXXX, XXXXXXX, \
     KC_WBAK, KC_BTN2, DRGSCRL, KC_BTN1, KC_WFWD, XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, \
-   S_D_RMOD, S_D_MOD,DPI_RMOD, DPI_MOD, XXXXXXX, RGB_TOG, RGB_MOD, RGB_VAI, RGB_HUI, RGB_SAI, \
+   S_D_RMOD, S_D_MOD,DPI_RMOD, DPI_MOD, XXXXXXX, RGB_TOG,RGB_RMOD, RGB_MOD, RGB_VAD, RGB_VAI, \
                       _______, KC_MPLY, KC_MSTP, KC_MSTP, KC_MPLY
 
 #define _HOME_ROW_MOD_GACS(                                            \
