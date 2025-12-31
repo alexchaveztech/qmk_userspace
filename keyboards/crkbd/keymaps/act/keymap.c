@@ -25,7 +25,7 @@ combo_t key_combos[] = {
     COMBO(g_l_combo, DF(LYR_TAP)),
 };
 
-#define ESC_MED LT(LYR_MED, KC_ESC)
+#define ESC_MED LT(LYR_MSE, KC_ESC)
 #define TAB_NUM LT(LYR_NUM, KC_TAB)
 #define SPC_NAV LT(LYR_NAV, KC_SPC)
 #define ENT_SYM LT(LYR_SYM, KC_ENT)
@@ -100,10 +100,10 @@ combo_t key_combos[] = {
                       KC_ESC,  KC_APP,   KC_TAB,  XXXXXXX, _______, XXXXXXX
 
 #define LAYOUT_LYR_MSE                                                                        \
-    _______________DEAD_HALF_ROW_______________, QK_BOOT,  EE_CLR,  QK_RBT, _______, _______, \
-    KC_WBAK, KC_BTN2, XXXXXXX, KC_BTN1, KC_WFWD, XXXXXXX, KC_BTN1, XXXXXXX, KC_BTN2, XXXXXXX, \
-    ______________HOME_ROW_GACS_L______________, ______________HOME_ROW_GACS_R______________, \
-                      _______, _______, _______, KC_BTN3, KC_BTN1, XXXXXXX
+    XXXXXXX, XXXXXXX,  QK_RBT,  EE_CLR, QK_BOOT, XXXXXXX, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, \
+    XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, \
+    ______________HOME_ROW_GACS_L______________, KC_WBAK, KC_BTN2, XXXXXXX, KC_BTN1, KC_WFWD, \
+                      _______, XXXXXXX, XXXXXXX, KC_BTN2, KC_BTN1, KC_BTN3
 
 #define _HOME_ROW_MOD_GACS(                                            \
     L00, L01, L02, L03, L04, R05, R06, R07, R08, R09,                  \

@@ -55,7 +55,9 @@ combo_t key_combos[] = {
 #ifndef POINTING_DEVICE_ENABLE
 #    define DRGSCRL KC_NO
 #    define DPI_MOD KC_NO
+#    define DPI_RMOD KC_NO
 #    define S_D_MOD KC_NO
+#    define S_D_RMOD KC_NO
 #    define SNIPING KC_NO
 #endif // !POINTING_DEVICE_ENABLE
 
@@ -80,7 +82,7 @@ combo_t key_combos[] = {
        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, \
                       KC_LCTL, KC_LALT,  KC_SPC, ENT_NUF, BSP_FUN
 #define LAYOUT_LYR_NAV                                                                        \
-    XXXXXXX, XXXXXXX,  QK_RBT,  EE_CLR, QK_BOOT,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP,  KC_END, \
+    _______________DEAD_HALF_ROW_______________,  KC_INS, KC_HOME, KC_PGDN, KC_PGUP,  KC_END, \
     KC_WBAK, KC_BTN2, DRGSCRL, KC_BTN1, KC_WFWD, CW_TOGG, KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, \
     ______________HOME_ROW_GACS_L______________,   U_RDO,   U_PST,   U_CPY,   U_CUT,   U_UND, \
                       XXXXXXX, _______, XXXXXXX,  KC_ENT,  KC_DEL
@@ -101,13 +103,13 @@ combo_t key_combos[] = {
                       KC_UNDS, KC_LPRN, KC_RPRN, _______, XXXXXXX
 #define LAYOUT_LYR_FUN                                                                        \
      KC_F12,   KC_F7,   KC_F8,   KC_F9, KC_PSCR, _______________DEAD_HALF_ROW_______________, \
-     KC_F11,   KC_F4,   KC_F5,   KC_F6, KC_SCRL, _______________DEAD_HALF_ROW_______________, \
+     KC_F11,   KC_F4,   KC_F5,   KC_F6, KC_SCRL, KC_WBAK, KC_BTN1, DRGSCRL, KC_BTN2, KC_WFWD, \
      KC_F10,   KC_F1,   KC_F2,   KC_F3, KC_PAUS, ______________HOME_ROW_GACS_R______________, \
                        KC_ESC,  KC_APP,  KC_TAB, XXXXXXX, _______
 #define LAYOUT_LYR_UTL                                                                        \
     XXXXXXX, XXXXXXX,  QK_RBT,  EE_CLR, QK_BOOT, QK_BOOT,  EE_CLR,  QK_RBT, XXXXXXX, XXXXXXX, \
-    KC_WBAK, KC_BTN2, DRGSCRL, KC_BTN1, KC_WFWD, XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, \
-   S_D_RMOD, S_D_MOD,DPI_RMOD, DPI_MOD, XXXXXXX, RGB_TOG,RGB_RMOD, RGB_MOD, RGB_VAD, RGB_VAI, \
+    _______________DEAD_HALF_ROW_______________, XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, \
+   DPI_RMOD, DPI_MOD,S_D_RMOD, S_D_MOD, XXXXXXX, RGB_TOG,RGB_RMOD, RGB_MOD, RGB_VAD, RGB_VAI, \
                       _______, KC_MPLY, KC_MSTP, KC_MSTP, KC_MPLY
 
 #define _HOME_ROW_MOD_GACS(                                            \
