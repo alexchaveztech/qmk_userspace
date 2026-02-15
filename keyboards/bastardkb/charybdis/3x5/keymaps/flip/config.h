@@ -16,15 +16,25 @@
  */
 #pragma once
 
+// #undef MASTER_RIGHT
+
 #ifdef VIA_ENABLE
-/* VIA configuration. */
-#    define DYNAMIC_KEYMAP_LAYER_COUNT 10
+#    define DYNAMIC_KEYMAP_LAYER_COUNT 9
 #endif // VIA_ENABLE
 
 #ifndef __arm__
 /* Disable unused features. */
 #    define NO_ACTION_ONESHOT
 #endif // __arm__
+
+/** Configure the global tapping term (default: 200ms) & combo term
+ *  disable double tap repeat in favor of efficient home row mod */
+
+#define QUICK_TAP_TERM 0
+#define COMBO_TERM 50
+#ifndef TAPPING_TERM
+#    define TAPPING_TERM 110
+#endif // TAPPING_TERM
 
 /* Charybdis-specific features. */
 #ifdef POINTING_DEVICE_ENABLE
