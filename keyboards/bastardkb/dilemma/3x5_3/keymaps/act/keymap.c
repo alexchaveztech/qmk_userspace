@@ -17,7 +17,7 @@ enum dilemma_keymap_layers {
 };
 
 // Automatically enable sniping-mode on the pointer layer.
-#define DILEMMA_AUTO_SNIPING_ON_LAYER LYR_NAV
+#define DILEMMA_AUTO_SNIPING_ON_LAYER LYR_SYM
 #ifdef DILEMMA_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 static uint16_t auto_pointer_layer_timer = 0;
 #    ifndef DILEMMA_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS
@@ -82,7 +82,7 @@ combo_t key_combos[] = {
        KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, \
        KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H, KC_BTN1, DRGSCRL, KC_BTN2, KC_BTN3, \
        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, \
-                      KC_LCTL, KC_LALT,  KC_SPC, ENT_NUF, BSP_NAV,  KC_DEL
+                      KC_LCTL, KC_LALT, KC_LSFT, ENT_NUF, BSP_NAV,  KC_DEL
 #define LAYOUT_LYR_NAV                                                                        \
     KC_HOME, KC_PGDN, KC_PGUP, KC_END,   KC_INS, _______________BOOT_LOADER_R_______________, \
     KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, CW_TOGG, KC_WFWD, KC_BTN1, DRGSCRL, KC_BTN2, KC_WBAK, \
@@ -92,17 +92,17 @@ combo_t key_combos[] = {
     _______________BOOT_LOADER_L_______________, KC_LBRC,    KC_7,    KC_8,    KC_9, KC_RBRC, \
     ________________MOUSE_DPI_L________________,  KC_EQL,    KC_4,    KC_5,    KC_6, KC_SCLN, \
     ______________HOME_ROW_GACS_L______________, KC_BSLS,    KC_1,    KC_2,    KC_3,  KC_GRV, \
-                      XXXXXXX, _______, XXXXXXX, KC_MINS,    KC_0,  KC_DOT
+                      XXXXXXX, XXXXXXX, _______, KC_MINS,    KC_0,  KC_DOT
 #define LAYOUT_LYR_NUF                                                                        \
-    KC_LBRC,    KC_7,    KC_8,    KC_9, KC_RBRC, _______________BOOT_LOADER_R_______________, \
-    KC_SCLN,    KC_4,    KC_5,    KC_6,  KC_EQL, ________________MOUSE_DPI_R________________, \
-     KC_GRV,    KC_1,    KC_2,    KC_3, KC_BSLS, ______________HOME_ROW_GACS_R______________, \
-                         KC_J,    KC_K,    KC_L, _______, XXXXXXX, XXXXXXX
+       KC_1,   KC_F7,   KC_F8,   KC_F9,    KC_4, _______________BOOT_LOADER_R_______________, \
+       KC_2,   KC_F4,   KC_F5,   KC_F6,    KC_5, ________________MOUSE_DPI_R________________, \
+       KC_3,   KC_F1,   KC_F2,   KC_F3,    KC_6, ______________HOME_ROW_GACS_R______________, \
+                       KC_ESC,  KC_SPC,  KC_TAB, _______, XXXXXXX, XXXXXXX
 #define LAYOUT_LYR_SYM                                                                        \
     _______________BOOT_LOADER_L_______________, KC_LCBR, KC_AMPR, KC_ASTR, KC_LPRN, KC_RCBR, \
     KC_WBAK, KC_BTN2, DRGSCRL, KC_BTN1, KC_WFWD, KC_PLUS,  KC_DLR, KC_PERC, KC_CIRC, KC_COLN, \
     ______________HOME_ROW_GACS_L______________, KC_PIPE, KC_EXLM,   KC_AT, KC_HASH, KC_TILD, \
-                      XXXXXXX, XXXXXXX, _______, KC_UNDS, KC_RPRN, XXXXXXX
+                      XXXXXXX, _______, XXXXXXX, KC_UNDS, KC_RPRN, XXXXXXX
 #define LAYOUT_LYR_FUN                                                                        \
     _______________BOOT_LOADER_L_______________, KC_PSCR,   KC_F7,   KC_F8,   KC_F9,  KC_F12, \
     ________________MOUSE_DPI_L________________, KC_SCRL,   KC_F4,   KC_F5,   KC_F6,  KC_F11, \
@@ -146,7 +146,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
     if (abs(mouse_report.x) > DILEMMA_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD || abs(mouse_report.y) > DILEMMA_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD) {
         if (auto_pointer_layer_timer == 0) {
-            layer_on(LYR_NAV);
+            layer_on(LYR_SYM);
 #        ifdef RGB_MATRIX_ENABLE
             rgb_matrix_mode_noeeprom(RGB_MATRIX_NONE);
             rgb_matrix_sethsv_noeeprom(HSV_GREEN);
@@ -160,7 +160,7 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 void matrix_scan_user(void) {
     if (auto_pointer_layer_timer != 0 && TIMER_DIFF_16(timer_read(), auto_pointer_layer_timer) >= DILEMMA_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS) {
         auto_pointer_layer_timer = 0;
-        layer_off(LYR_NAV);
+        layer_off(LYR_SYM);
 #        ifdef RGB_MATRIX_ENABLE
         rgb_matrix_mode_noeeprom(RGB_MATRIX_DEFAULT_MODE);
 #        endif // RGB_MATRIX_ENABLE
