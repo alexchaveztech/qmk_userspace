@@ -22,7 +22,7 @@
 
 enum charybdis_keymap_layers {
     LYR_BSE = 0,
-    LYR_TAP,
+    LYR_ALT,
     LYR_NAV,
     LYR_NUM,
     LYR_NUF,
@@ -45,12 +45,12 @@ static uint16_t auto_pointer_layer_timer = 0;
 #    endif // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD
 #endif     // CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
 
-//Combo to switch to switch BASE (Canary), TAP Game (Qwerty Modified)
-const uint16_t PROGMEM g_q_combo[] = {KC_G, KC_Q, COMBO_END};
-const uint16_t PROGMEM g_l_combo[] = {KC_G, KC_L, COMBO_END};
+//Combo to switch to switch BASE (Canary), ALT Gallium, replaced TAP Game (Qwerty Modified)
+const uint16_t PROGMEM lyr_base_combo[] = {KC_G, KC_B, COMBO_END};
+const uint16_t PROGMEM lyr_alt_combo[] = {KC_G, KC_A, COMBO_END};
 combo_t key_combos[] = {
-    COMBO(g_q_combo, DF(LYR_BSE)),
-    COMBO(g_l_combo, DF(LYR_TAP)),
+    COMBO(lyr_base_combo, DF(LYR_BSE)),
+    COMBO(lyr_alt_combo, DF(LYR_ALT)),
 };
 
 #define ESC_FUN LT(LYR_FUN, KC_ESC)
@@ -91,11 +91,19 @@ combo_t key_combos[] = {
        KC_C,    KC_R,    KC_S,    KC_T,    KC_G,    KC_M,    KC_N,    KC_E,    KC_I,    KC_A, \
        KC_Q,    KC_J,    KC_V,    KC_D,    KC_K,    KC_X,    KC_H, KC_COMM,  KC_DOT, KC_SLSH, \
                       ESC_FUN, SPC_SYM, TAB_NUM, ENT_MED, BSP_NAV
-#define LAYOUT_LYR_TAP                                                                        \
+
+#define LAYOUT_LYR_ALT                                                                        \
+       KC_B,    KC_L,    KC_D,    KC_C,    KC_V,    KC_J,    KC_Y,    KC_O,    KC_U, KC_QUOT, \
+       KC_N,    KC_R,    KC_T,    KC_S,    KC_G,    KC_P,    KC_H,    KC_A,    KC_E,    KC_I, \
+       KC_X,    KC_Q,    KC_M,    KC_W,    KC_Z,    KC_K,    KC_F, KC_COMM,  KC_DOT, KC_SLSH, \
+                      ESC_FUN, SPC_SYM, TAB_NUM, ENT_MED, BSP_NAV
+/**
+#defineefine LAYOUT_LYR_TAP                                                                        \
        KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P, \
        KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L, KC_QUOT, \
        KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH, \
                       KC_LCTL, KC_LALT, KC_LSFT, ENT_NUF, BSP_NAV
+*/
 #define LAYOUT_LYR_NAV                                                                        \
     KC_HOME, KC_PGDN, KC_PGUP,  KC_END,  KC_INS, _______________BOOT_LOADER_R_______________, \
     KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_CAPS, KC_WFWD, MS_BTN1, DRGSCRL, MS_BTN2, KC_WBAK, \
@@ -160,7 +168,7 @@ combo_t key_combos[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [LYR_BSE] = LAYOUT_wrapper(POINTER_MOD(HOME_ROW_MOD_GACS(LAYOUT_LYR_BSE))),
-  [LYR_TAP] = LAYOUT_wrapper(LAYOUT_LYR_TAP),
+  [LYR_ALT] = LAYOUT_wrapper(LAYOUT_LYR_ALT),
   [LYR_NAV] = LAYOUT_wrapper(LAYOUT_LYR_NAV),
   [LYR_NUM] = LAYOUT_wrapper(LAYOUT_LYR_NUM),
   [LYR_NUF] = LAYOUT_wrapper(LAYOUT_LYR_NUF),
