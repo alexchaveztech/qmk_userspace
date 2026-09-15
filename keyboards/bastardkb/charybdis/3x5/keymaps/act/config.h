@@ -26,11 +26,6 @@
 #    define NO_ACTION_ONESHOT
 #endif // __arm__
 
-#ifdef AUTO_MOUSE_DEFAULT_LAYER
-#undef AUTO_MOUSE_DEFAULT_LAYER
-#endif
-#define AUTO_MOUSE_DEFAULT_LAYER 6
-
 #ifdef LED_DPI_INDICATOR_INDEX
 #undef LED_DPI_INDICATOR_INDEX
 #endif
@@ -47,9 +42,3 @@
 #    define TAPPING_TERM 110
 #endif // TAPPING_TERM
 
-#ifdef POINTING_DEVICE_ENABLE
-// Automatically enable the pointer layer when moving the trackball.  See also:
-// - `CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_TIMEOUT_MS`
-// - `CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_THRESHOLD`
-// #define CHARYBDIS_AUTO_POINTER_LAYER_TRIGGER_ENABLE
-#endif // POINTING_DEVICE_ENABLE
